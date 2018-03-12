@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <p:layout  fullPage="true">
+            <p:layoutUnit position="center" style="border-width: 0;">
+                <h:form>
+                    <p:panel style=" border-top: 0; border-left: 0;border-right: 0;
+                             border-bottom-width: 2px;border-bottom-color: red;">
+                        <h:panelGrid columns="3">
+                            <h:graphicImage  id="logo" url="#{resource['images:logo.jpg']}"
+                                             width="200" style="padding-left: 30px" />
+                            <h:panelGrid columns="3" style="padding-left: 500px;padding-right: 20px">
+                                <p:inputText id="txt" value="${searchManagedBean.search}" size="30"/>
+                                <p:watermark for="txt" value="Search with a book name"/>
+                                <p:commandButton value="搜索" update="books" actionListener="#{dataGridManagedBean.setBooksBySearch()}" 
+                                                 style="min-width: 75px"/>
+                            </h:panelGrid>
+                            <p:commandButton value="查看购物车" icon="ui-icon-cart" style="min-width: 155px" />
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+                <h:panelGrid style="min-height: 10px"></h:panelGrid>
+
+
+                <!--左边的目录栏：图书分类及推荐书目-->
+
+                <h:panelGrid columns="2" cellpadding="0">
+                    
+                        <p:panel style="min-height: 1275px;border-width: 0;
+                                 padding-left: 10px;padding-right: 0px; padding-top: 0px;">
+                            <h:form>
+                            <!--<h:panelGrid style="padding-right: 0px; padding-top: 0px">-->
+                            <p:menu toggleable="true"  style="background-color: white">
+                                <p:submenu label="图书分类" style="color: white;
+                                           background-image: url(#{resource['images:bg.png']});">
+                                    <p:menuitem value="成功学" actionListener="#{dataGridManagedBean.setBooksByCatalogue('成功学')}" update="books"/>
+                                    <p:menuitem value="计算机与网络" actionListener="#{dataGridManagedBean.setBooksByCatalogue('计算机与网络')}" update="books"/>
+                                    <p:menuitem value="建筑" actionListener="#{dataGridManagedBean.setBooksByCatalogue('建筑')}" update="books"/>
+                                    <p:menuitem value="青春与动漫" actionListener="#{dataGridManagedBean.setBooksByCatalogue('青春与动漫')}" update="books"/>
+                                    <p:menuitem value="小说" actionListener="#{dataGridManagedBean.setBooksByCatalogue('小说')}" update="books"/>
+                                    <p:menuitem value="心理学" actionListener="#{dataGridManagedBean.setBooksByCatalogue('心理学')}" update="books"/>
+                                    <p:menuitem value="医学" actionListener="#{dataGridManagedBean.setBooksByCatalogue('医学')}" update="books"/>
+                                    <p:menuitem value="艺术" actionListener="#{dataGridManagedBean.setBooksByCatalogue('艺术')}" update="books"/>
+                                    <p:menuitem value="自然与科学" actionListener="#{dataGridManagedBean.setBooksByCatalogue('自然与科学')}" update="books"/>
+                                </p:submenu>
+                            </p:menu>
+                            </h:form>
+                            <h:panelGrid style="min-height: 10px"></h:panelGrid>
+                            <p:panel header="销量三甲" style="min-height: 620px;">
+                                <h:panelGrid columns="1" style="text-align: center;padding-bottom: 40px">
+                                    <h:graphicImage id="top1" value="/resources/images/books/#{dataGridManagedBean.top3.get(0).getBookpicture()}"
+                                                    style=" width: 165px;"/>
+                                    <h:form>
+                                        <h:commandLink value="#{dataGridManagedBean.top3.get(0).getBookname()}" action="bookDetail.xhtml" style="text-decoration: none">
+                                            <f:setPropertyActionListener value="#{dataGridManagedBean.top3.get(0)}" target="#{dataGridManagedBean.selectedBook}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                    <h:outputText value="#{dataGridManagedBean.top3.get(0).getPrice()}¥" style="color: red"/>
+                                    <p:panel style="border: 0; padding-top: 0">
+                                        <h:outputText value="累计已售出: " style="font-size: 10px"/>
+                                        <h:outputText value="#{dataGridManagedBean.top3.get(0).getSellcount()}" style="font-size:15px; color: red;"/><!--database-->
+                                        <h:outputText value=" 本" style="font-size:10px;"/>
+                                    </p:panel>
+                                    <h:graphicImage id="top2" value="/resources/images/books/#{dataGridManagedBean.top3.get(1).getBookpicture()}"
+                                                    style=" width: 165px;"/>
+                                    <h:form>
+                                        <h:commandLink value="#{dataGridManagedBean.top3.get(1).getBookname()}" action="bookDetail.xhtml" style="text-decoration: none">
+                                            <f:setPropertyActionListener value="#{dataGridManagedBean.top3.get(1)}" target="#{dataGridManagedBean.selectedBook}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                    <h:outputText value="#{dataGridManagedBean.top3.get(1).getPrice()}¥" style="color: red"/>
+                                    <p:panel style="border: 0; padding-top: 0">
+                                        <h:outputText value="累计已售出: " style="font-size: 10px"/>
+                                        <h:outputText value="#{dataGridManagedBean.top3.get(1).getSellcount()}" style="font-size:15px; color: red;"/><!--database-->
+                                        <h:outputText value=" 本" style="font-size:10px;"/>
+                                    </p:panel>
+                                    <h:graphicImage id="top3" value="/resources/images/books/#{dataGridManagedBean.top3.get(2).getBookpicture()}"
+                                                    style=" width: 165px;"/>
+                                    <h:form>
+                                        <h:commandLink value="#{dataGridManagedBean.top3.get(2).getBookname()}" action="bookDetail.xhtml" style="text-decoration: none">
+                                            <f:setPropertyActionListener value="#{dataGridManagedBean.top3.get(2)}" target="#{dataGridManagedBean.selectedBook}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                    <h:outputText value="#{dataGridManagedBean.top3.get(2).getPrice()}¥" style="color: red"/>
+                                    <p:panel style="border: 0; padding-top: 0">
+                                        <h:outputText value="累计已售出: " style="font-size: 10px"/>
+                                        <h:outputText value="#{dataGridManagedBean.top3.get(2).getSellcount()}" style="font-size:15px; color: red;"/><!--database-->
+                                        <h:outputText value=" 本" style="font-size:10px;"/>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:panel>
+
+
+
+                    <p:panel style="min-height: 1280px;min-width: 1020px;border: 0">
+                        <p:dataGrid var="book" value="#{dataGridManagedBean.books}" columns="4" layout="grid"
+                                    rows="16" paginator="true" id="books" style="min-height:500px"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            <p:panel style="border: 0;text-align:center">
+
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <p:graphicImage id="bookimage" value="/resources/images/books/#{book.bookpicture}" width="165px"/>
+                                    <h:form>
+                                        <h:commandLink id="bookname" value="#{book.bookname}" action="bookDetail.xhtml" style="text-decoration:none">
+                                            <f:setPropertyActionListener value="#{book}"  target="#{dataGridManagedBean.selectedBook}" />
+                                        </h:commandLink>
+                                    </h:form>
+                                    <h:outputText id="bookprice" value="#{book.price}"/>
+                                </h:panelGrid>
+
+                            </p:panel>
+                        </p:dataGrid>
+                    </p:panel>
+
+
+                </h:panelGrid>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

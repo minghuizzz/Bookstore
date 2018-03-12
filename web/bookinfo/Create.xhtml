@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookinfoCreateDlg" widgetVar="BookinfoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBookinfoTitle}">
+            <h:form id="BookinfoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookinfoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bookinfoController.selected.id}" title="#{bundle.CreateBookinfoTitle_id}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_isbn}" for="isbn" />
+                        <p:inputText id="isbn" value="#{bookinfoController.selected.isbn}" title="#{bundle.CreateBookinfoTitle_isbn}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_isbn}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_author}" for="author" />
+                        <p:inputText id="author" value="#{bookinfoController.selected.author}" title="#{bundle.CreateBookinfoTitle_author}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_author}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_bookname}" for="bookname" />
+                        <p:inputText id="bookname" value="#{bookinfoController.selected.bookname}" title="#{bundle.CreateBookinfoTitle_bookname}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_bookname}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{bookinfoController.selected.price}" title="#{bundle.CreateBookinfoTitle_price}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_price}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_booktype}" for="booktype" />
+                        <p:inputText id="booktype" value="#{bookinfoController.selected.booktype}" title="#{bundle.CreateBookinfoTitle_booktype}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_booktype}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_bookpicture}" for="bookpicture" />
+                        <p:inputText id="bookpicture" value="#{bookinfoController.selected.bookpicture}" title="#{bundle.CreateBookinfoTitle_bookpicture}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_bookpicture}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{bookinfoController.selected.description}" title="#{bundle.CreateBookinfoTitle_description}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_description}"/>
+                        <p:outputLabel value="#{bundle.CreateBookinfoLabel_sellcount}" for="sellcount" />
+                        <p:inputText id="sellcount" value="#{bookinfoController.selected.sellcount}" title="#{bundle.CreateBookinfoTitle_sellcount}" required="true" requiredMessage="#{bundle.CreateBookinfoRequiredMessage_sellcount}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bookinfoController.create}" value="#{bundle.Save}" update="display,:BookinfoListForm:datalist,:growl" oncomplete="handleSubmit(args,'BookinfoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BookinfoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

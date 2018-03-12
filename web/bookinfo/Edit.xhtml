@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookinfoEditDlg" widgetVar="BookinfoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBookinfoTitle}">
+            <h:form id="BookinfoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookinfoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{bookinfoController.selected.id}" title="#{bundle.EditBookinfoTitle_id}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_isbn}" for="isbn" />
+                        <p:inputText id="isbn" value="#{bookinfoController.selected.isbn}" title="#{bundle.EditBookinfoTitle_isbn}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_isbn}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_author}" for="author" />
+                        <p:inputText id="author" value="#{bookinfoController.selected.author}" title="#{bundle.EditBookinfoTitle_author}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_author}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_bookname}" for="bookname" />
+                        <p:inputText id="bookname" value="#{bookinfoController.selected.bookname}" title="#{bundle.EditBookinfoTitle_bookname}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_bookname}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_price}" for="price" />
+                        <p:inputText id="price" value="#{bookinfoController.selected.price}" title="#{bundle.EditBookinfoTitle_price}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_price}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_booktype}" for="booktype" />
+                        <p:inputText id="booktype" value="#{bookinfoController.selected.booktype}" title="#{bundle.EditBookinfoTitle_booktype}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_booktype}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_bookpicture}" for="bookpicture" />
+                        <p:inputText id="bookpicture" value="#{bookinfoController.selected.bookpicture}" title="#{bundle.EditBookinfoTitle_bookpicture}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_bookpicture}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{bookinfoController.selected.description}" title="#{bundle.EditBookinfoTitle_description}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_description}"/>
+                        <p:outputLabel value="#{bundle.EditBookinfoLabel_sellcount}" for="sellcount" />
+                        <p:inputText id="sellcount" value="#{bookinfoController.selected.sellcount}" title="#{bundle.EditBookinfoTitle_sellcount}" required="true" requiredMessage="#{bundle.EditBookinfoRequiredMessage_sellcount}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bookinfoController.update}" value="#{bundle.Save}" update="display,:BookinfoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BookinfoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BookinfoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

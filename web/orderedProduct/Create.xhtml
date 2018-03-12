@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrderedProductCreateDlg" widgetVar="OrderedProductCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOrderedProductTitle}">
+            <h:form id="OrderedProductCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{orderedProductController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOrderedProductLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{orderedProductController.selected.quantity}" title="#{bundle.CreateOrderedProductTitle_quantity}" />
+                        <p:outputLabel value="#{bundle.CreateOrderedProductLabel_customerOrder}" for="customerOrder" />
+                        <p:selectOneMenu id="customerOrder" value="#{orderedProductController.selected.customerOrder}" required="true" requiredMessage="#{bundle.EditOrderedProductRequiredMessage_customerOrder}">
+                            <f:selectItems value="#{customerOrderController.itemsAvailableSelectOne}"
+                                           var="customerOrderItem"
+                                           itemValue="#{customerOrderItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOrderedProductLabel_bookinfo}" for="bookinfo" />
+                        <p:selectOneMenu id="bookinfo" value="#{orderedProductController.selected.bookinfo}" required="true" requiredMessage="#{bundle.EditOrderedProductRequiredMessage_bookinfo}">
+                            <f:selectItems value="#{bookinfoController.itemsAvailableSelectOne}"
+                                           var="bookinfoItem"
+                                           itemValue="#{bookinfoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{orderedProductController.create}" value="#{bundle.Save}" update="display,:OrderedProductListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrderedProductCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrderedProductCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
